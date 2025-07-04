@@ -22,6 +22,11 @@ jobs:
       - name: Checkout 仓库 # 检出仓库代码
         uses: actions/checkout@v4
 
+      - name: 安装依赖
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq  # 安装jq命令
+
       - name: 检查并初始化 update_type.txt # 检查并初始化 update_type.txt 文件
         id: init_update_type_file
         run: |
@@ -175,5 +180,5 @@ jobs:
               repo,
               title: `✅ _worker.js 自动更新成功：${typeText} ${latestTag}`,
               body: `_worker.js 已成功更新到${typeText} ${latestTag}。`,
-              labels: ['auto-update', 'success'] # 为 Issue 添加标签
+              labels: ['auto-update', 'success'] // 为 Issue 添加标签
             });
